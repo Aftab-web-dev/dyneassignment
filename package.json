@@ -1,0 +1,13 @@
+{
+  "name": "assigments",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm --prefix client dev\" \"pnpm --prefix server dev\"",
+    "client": "pnpm --prefix client dev",
+    "server": "pnpm --prefix server dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
