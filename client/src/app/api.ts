@@ -9,7 +9,11 @@ import type {
 } from "../types";
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.PROD
+      ? "https://dyneassignment.vercel.app/api"
+      : "/api",
+  }),
   tagTypes: ["Products", "Analytics"],
   endpoints: (builder) => ({
     uploadFile: builder.mutation<UploadResponse, FormData>({
