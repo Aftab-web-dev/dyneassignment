@@ -3,8 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Strip channel_binding param — not supported in all serverless runtimes
+const connectionString = (process.env.DATABASE_URL || "").replace(
+  /[&?]channel_binding=[^&]*/g,
+  ""
+);
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString,
   ssl: { rejectUnauthorized: false },
 });
 

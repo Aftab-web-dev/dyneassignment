@@ -50,4 +50,6 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
+// Vercel needs module.exports for Express apps
+module.exports = app;
 export default app;
