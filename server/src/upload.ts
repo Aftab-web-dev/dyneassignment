@@ -12,9 +12,25 @@ const storage = multer.diskStorage({
   },
 });
 
+const allowedExtensions = [".csv", ".xlsx", ".xls"];
+
+const fileFilter = (
+  _req: Express.Request,
+  file: Express.Multer.File,
+  cb: multer.FileFilterCallback
+) => {
+  const ext = path.extname(file.originalname).toLowerCase();
+  if (allowedExtensions.includes(ext)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only .csv, .xlsx, and .xls files are allowed"));
+  }
+};
+
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  fileFilter,
 });
 
 export default upload;
